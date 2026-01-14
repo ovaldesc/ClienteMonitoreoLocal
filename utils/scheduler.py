@@ -28,7 +28,9 @@ def _copiar_ejecutable_a_config():
         origen = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "main.py"))
 
     try:
-        os.makedirs(os.path.dirname(destino), exist_ok=True)
+        dir_destino = os.path.dirname(destino)
+        if not os.path.exists(dir_destino):
+            os.makedirs(dir_destino)
         shutil.copy2(origen, destino)
         if platform.system() != "Windows":
             os.chmod(destino, 0o755)
@@ -46,7 +48,7 @@ def _registrar_con_at(horas, ruta_ejecutable):
         for i in range(0, 24, intervalo):
             hora = "{:02d}:00".format(i)
             cmd = ["at", hora, "/every:M,T,W,Th,F,S,Su", ruta_ejecutable]
-            subprocess.check_call(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.check_call(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         print("Tarea creada en Windows XP (cada ~{}h)".format(intervalo))
         return True
     except Exception as e:
@@ -55,11 +57,10 @@ def _registrar_con_at(horas, ruta_ejecutable):
 
 def _registrar_con_schtasks(horas, ruta_ejecutable):
     try:
-        # ✅ Sin comillas: la ruta ya NO tiene espacios
         cmd_tr = ruta_ejecutable
-
         task_name = "ClienteMonitoreoLocal"
-        # Eliminar tarea anterior (silenciosamente)
+
+        # Eliminar tarea anterior
         try:
             subprocess.check_call(
                 ["schtasks", "/delete", "/tn", task_name, "/f"],
@@ -67,7 +68,7 @@ def _registrar_con_schtasks(horas, ruta_ejecutable):
                 stderr=subprocess.PIPE
             )
         except subprocess.CalledProcessError:
-            pass  # No importa si no existía
+            pass
 
         if horas >= 24 and horas % 24 == 0:
             dias = horas // 24
@@ -92,14 +93,12 @@ def _registrar_con_schtasks(horas, ruta_ejecutable):
                 "/f"
             ]
 
-        # ✅ Compatible con Python 3.4
         proc = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            universal_newlines=True  # Para texto en lugar de bytes
+            universal_newlines=True
         )
-        
         stdout, stderr = proc.communicate()
 
         if proc.returncode != 0:
@@ -132,7 +131,7 @@ def _registrar_crontab_linux(horas, ruta_ejecutable):
         print("Crontab actualizado (cada {}h)".format(horas))
         return True
     except Exception as e:
-        print("Error en crontab:", str(e))
+        print("Error en crontab: {}".format(str(e)))
         return False
 
 def registrar_tarea_programada():
@@ -146,7 +145,6 @@ def registrar_tarea_programada():
     if horas < 1:
         horas = 24
 
-    # Copiar el ejecutable a la carpeta segura
     ruta_instalada = _copiar_ejecutable_a_config()
     if not ruta_instalada:
         print("Advertencia: no se pudo copiar el ejecutable. Usando ruta actual.")
