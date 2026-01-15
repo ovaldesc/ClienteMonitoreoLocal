@@ -1,4 +1,4 @@
-# utils/config_manager.py
+# utils/config_manager.py (MODIFICADO)
 
 import os
 import json
@@ -11,7 +11,6 @@ from utils.aes_puro import _aes_cbc_encrypt, _aes_cbc_decrypt
 def _get_config_dir():
     system = platform.system().lower()
     if system == "windows":
-        # ✅ SIN ESPACIOS en el nombre de la carpeta
         return os.path.join(os.environ.get("APPDATA", ""), "ClienteMonitoreoLocal")
     elif system == "linux":
         return os.path.join(os.path.expanduser("~"), ".config", "ClienteMonitoreoLocal")
@@ -43,12 +42,13 @@ class ConfigManager:
     def _crear_directorio(self):
         os.makedirs(self.config_dir, exist_ok=True)
 
-    def guardar_configuracion(self, ip_servidor, horas_tarea):
+    def guardar_configuracion(self, ip_servidor, horas_tarea, ultima_ejecucion=None):
         datos = {
             "ip_servidor": ip_servidor,
             "horas_tarea": horas_tarea,
             "log_path": self.log_file,
             "fecha_guardado": datetime.now().isoformat(),
+            "ultima_ejecucion": ultima_ejecucion or datetime.now().isoformat(),
         }
         datos_bytes = json.dumps(datos, ensure_ascii=False).encode('utf-8')
         clave = _generar_clave_128()

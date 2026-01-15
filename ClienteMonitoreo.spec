@@ -3,10 +3,10 @@
 block_cipher = None
 
 
-a = Analysis(['c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\main.py'],
-             pathex=['C:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente'],
+a = Analysis(['c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva carpeta\\ClienteMonitoreoLocal\\main.py'],
+             pathex=['C:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva carpeta\\ClienteMonitoreoLocal'],
              binaries=[],
-             datas=[('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\core', 'core'), ('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\services', 'services'), ('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\sistema', 'sistema'), ('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils', 'utils')],
+             datas=[('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva carpeta\\ClienteMonitoreoLocal\\core', 'core'), ('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva carpeta\\ClienteMonitoreoLocal\\services', 'services'), ('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva carpeta\\ClienteMonitoreoLocal\\sistema', 'sistema'), ('c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva carpeta\\ClienteMonitoreoLocal\\utils', 'utils')],
              hiddenimports=['requests', 'win32net', 'win32netcon', 'pywintypes', 'wmi'],
              hookspath=[],
              runtime_hooks=[],

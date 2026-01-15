@@ -1,6 +1,9 @@
-(['c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\main.py'],
- ['c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente',
-  'C:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente'],
+(['c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+  'carpeta\\ClienteMonitoreoLocal\\main.py'],
+ ['c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+  'carpeta\\ClienteMonitoreoLocal',
+  'C:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+  'carpeta\\ClienteMonitoreoLocal'],
  ['requests', 'win32net', 'win32netcon', 'pywintypes', 'wmi', 'codecs'],
  [],
  [],
@@ -16,7 +19,8 @@
    'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\rthooks\\pyi_rth_multiprocessing.py',
    'PYSOURCE'),
   ('main',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\main.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\main.py',
    'PYSOURCE')],
  [('multiprocessing.popen_fork',
    'C:\\Python34\\lib\\multiprocessing\\popen_fork.py',
@@ -90,7 +94,6 @@
    'PYMODULE'),
   ('ntpath', 'C:\\Python34\\lib\\ntpath.py', 'PYMODULE'),
   ('_strptime', 'C:\\Python34\\lib\\_strptime.py', 'PYMODULE'),
-  ('datetime', 'C:\\Python34\\lib\\datetime.py', 'PYMODULE'),
   ('stringprep', 'C:\\Python34\\lib\\stringprep.py', 'PYMODULE'),
   ('requests.packages.urllib3.contrib',
    'C:\\Python34\\lib\\site-packages\\requests\\packages\\urllib3\\contrib\\__init__.py',
@@ -613,37 +616,48 @@
    'PYMODULE'),
   ('wmi', 'C:\\Python34\\lib\\site-packages\\wmi.py', 'PYMODULE'),
   ('utils.auto_actualizacion',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\auto_actualizacion.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\auto_actualizacion.py',
    'PYMODULE'),
   ('utils',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\__init__.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\__init__.py',
    'PYMODULE'),
   ('utils.consola',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\consola.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\consola.py',
    'PYMODULE'),
   ('utils.config_interactiva',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\config_interactiva.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\config_interactiva.py',
    'PYMODULE'),
   ('services.servidor',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\services\\servidor.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\services\\servidor.py',
    'PYMODULE'),
   ('services',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\services\\__init__.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\services\\__init__.py',
    'PYMODULE'),
   ('utils.hash_utils',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\hash_utils.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\hash_utils.py',
    'PYMODULE'),
   ('services.reporte',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\services\\reporte.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\services\\reporte.py',
    'PYMODULE'),
   ('services.recoleccion',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\services\\recoleccion.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\services\\recoleccion.py',
    'PYMODULE'),
   ('utils.utiles',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\utiles.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\utiles.py',
    'PYMODULE'),
   ('services.escaneo',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\services\\escaneo.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\services\\escaneo.py',
    'PYMODULE'),
   ('concurrent.futures',
    'C:\\Python34\\lib\\concurrent\\futures\\__init__.py',
@@ -659,31 +673,39 @@
    'PYMODULE'),
   ('concurrent', 'C:\\Python34\\lib\\concurrent\\__init__.py', 'PYMODULE'),
   ('core.sistema_operativo',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\core\\sistema_operativo.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\core\\sistema_operativo.py',
    'PYMODULE'),
   ('core',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\core\\__init__.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\core\\__init__.py',
    'PYMODULE'),
   ('utils.scheduler',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\scheduler.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\scheduler.py',
    'PYMODULE'),
   ('utils.token_manager',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\token_manager.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\token_manager.py',
    'PYMODULE'),
   ('utils.aes_puro',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\aes_puro.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\aes_puro.py',
    'PYMODULE'),
   ('utils.config_manager',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\config_manager.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\config_manager.py',
    'PYMODULE'),
   ('utils.log_redirect',
-   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\utils\\log_redirect.py',
+   'c:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\utils\\log_redirect.py',
    'PYMODULE'),
+  ('datetime', 'C:\\Python34\\lib\\datetime.py', 'PYMODULE'),
   ('os', 'C:\\Python34\\lib\\os.py', 'PYMODULE')],
  [('MSVCR100.dll', 'C:\\Windows\\system32\\msvcr100.dll', 'BINARY'),
   ('python34.dll', 'C:\\Windows\\system32\\python34.dll', 'BINARY'),
-  ('pywintypes34.dll', 'C:\\Windows\\SYSTEM32\\pywintypes34.dll', 'BINARY'),
   ('pythoncom34.dll', 'C:\\Windows\\SYSTEM32\\pythoncom34.dll', 'BINARY'),
+  ('pywintypes34.dll', 'C:\\Windows\\SYSTEM32\\pywintypes34.dll', 'BINARY'),
   ('_multiprocessing',
    'C:\\Python34\\DLLs\\_multiprocessing.pyd',
    'EXTENSION'),
@@ -720,7 +742,8 @@
  [],
  [],
  [('base_library.zip',
-   'C:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Cliente\\build\\ClienteMonitoreo\\base_library.zip',
+   'C:\\Users\\Internet\\Downloads\\Compressed\\CSI\\CSI\\Nueva '
+   'carpeta\\ClienteMonitoreoLocal\\build\\ClienteMonitoreo\\base_library.zip',
    'DATA'),
   ('Include\\pyconfig.h', 'C:\\Python34\\Include\\pyconfig.h', 'DATA')],
  [])
