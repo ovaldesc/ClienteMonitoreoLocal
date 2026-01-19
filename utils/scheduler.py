@@ -6,6 +6,8 @@ import shutil
 import subprocess
 import platform
 from .config_manager import ConfigManager
+import ctypes
+from ctypes import wintypes
 
 def _get_ruta_instalada():
     config = ConfigManager()
@@ -41,21 +43,40 @@ def _es_windows_xp():
 def _crear_bat_en_startup(ruta_ejecutable):
     if platform.system() != "Windows":
         return False
-    startup_dir = os.path.join(
-        os.environ["USERSPROFILE"],
-        "Menú Inicio",
-        "Programas",
-        "Inicio"
-    )
+    """Obtiene la ruta real del Startup folder, independiente del idioma."""
+    CSIDL_STARTUP = 7  # Constante de Windows para "Startup folder"
+    buf = ctypes.create_unicode_buffer(wintypes.MAX_PATH)
+    try:
+        ctypes.windll.shell32.SHGetFolderPathW(None, CSIDL_STARTUP, None, 0, buf)
+        startup_dir = buf.value
+    except Exception:
+        startup_dir = os.path.join(
+            os.environ.get("USERPROFILE", ""),
+            "Menú Inicio",
+            "Programas",
+            "Inicio"
+        )
+    if not startup_dir or not os.path.isdir(os.path.dirname(startup_dir)):
+        print("No se pudo determinar la carpeta de inicio.")
+        return False
+    
     bat_path = os.path.join(startup_dir, "ClienteMonitoreo.bat")
     ruta_abs = os.path.abspath(ruta_ejecutable)
     try:
+        # Crear directorio solo si no existe (evita WinError 183 en XP)
+        if not os.path.exists(startup_dir):
+            os.makedirs(startup_dir)
+        elif not os.path.isdir(startup_dir):
+            print("¡Advertencia! La ruta de Startup no es un directorio: {}".format(startup_dir))
+            return False
+
         with open(bat_path, "w") as f:
             f.write("@echo off\n")
             f.write('cd /d "{}"\n'.format(os.path.dirname(ruta_abs)))
             f.write('"{}"\n'.format(ruta_abs))
         print("Archivo .bat creado en Startup: {}".format(bat_path))
         return True
+
     except Exception as e:
         print("Error al crear .bat en Startup: {}".format(str(e)))
         return False

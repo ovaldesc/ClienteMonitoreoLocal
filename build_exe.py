@@ -41,6 +41,8 @@ common_args = [
     "pywintypes",
     "--hidden-import",
     "wmi",
+    "--hidden-import",
+    "ctypes",
     "--name",
     "ClienteMonitoreo",
 ]
