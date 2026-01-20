@@ -1,11 +1,11 @@
 # utils/token_manager.py
+
 import os
 import json
 import uuid
 import platform
 import hashlib
 from utils.aes_puro import _aes_cbc_encrypt, _aes_cbc_decrypt
-
 
 def _generar_clave_128():
     try:
@@ -18,11 +18,11 @@ def _generar_clave_128():
 
 class TokenManager:
     def __init__(self):
-        # Ruta configurada por ConfigManager en main (o por defecto)
         self._ruta = None
+        self.token_file = None
 
     def set_ruta(self, ruta):
-        """Establece la carpeta donde guardar .csi_token"""
+        """Establece la carpeta donde guardar .csi_token (debe ser data_dir, no config_dir)"""
         self._ruta = ruta
         self.token_file = os.path.join(ruta, ".csi_token")
 
@@ -36,6 +36,8 @@ class TokenManager:
             datos_bytes = json.dumps(datos, ensure_ascii=False).encode('utf-8')
             clave = _generar_clave_128()
             cifrado = _aes_cbc_encrypt(datos_bytes, clave)
+            # Asegurar que el directorio exista
+            os.makedirs(self._ruta, exist_ok=True)
             with open(self.token_file, "wb") as f:
                 f.write(cifrado)
             try:
@@ -49,7 +51,7 @@ class TokenManager:
 
     def obtener_token(self):
         try:
-            if not os.path.exists(self.token_file):
+            if not self.token_file or not os.path.exists(self.token_file):
                 return None
             with open(self.token_file, "rb") as f:
                 cifrado = f.read()
@@ -63,7 +65,7 @@ class TokenManager:
 
     def obtener_info_equipo(self):
         try:
-            if not os.path.exists(self.token_file):
+            if not self.token_file or not os.path.exists(self.token_file):
                 return None, None
             with open(self.token_file, "rb") as f:
                 cifrado = f.read()
@@ -76,10 +78,11 @@ class TokenManager:
 
     def eliminar_token(self):
         try:
-            if os.path.exists(self.token_file):
+            if self.token_file and os.path.exists(self.token_file):
                 os.unlink(self.token_file)
-            return True
+                return True
         except Exception:
-            return False
+            pass
+        return False
 
 token_manager = TokenManager()

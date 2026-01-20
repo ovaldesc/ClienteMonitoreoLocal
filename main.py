@@ -1,8 +1,9 @@
-# main.py (MODIFICADO)
+# main.py
 
 import sys
 import os
-from datetime import datetime, timedelta
+import ctypes
+from datetime import datetime
 from utils.log_redirect import start_logging, stop_logging
 from utils.config_manager import ConfigManager
 from utils.token_manager import token_manager
@@ -11,10 +12,8 @@ from services.recoleccion import recolectar_datos_completos
 from services.reporte import generar_informe, procesar_informes_pendientes
 from services.servidor import ClienteServidor
 from utils.config_interactiva import pedir_configuracion_inicial
-from utils.consola import ocultar_consola_si_no_interactiva
+from utils.consola import ocultar_consola_si_no_interactiva, es_admin
 from utils.auto_actualizacion import auto_actualizar_si_necesario
-from utils.consola import es_admin
-
 def _debe_ejecutarse(conf):
     """Devuelve True si ya pasó el tiempo necesario desde la última ejecución."""
     horas = int(conf.get("horas_tarea", 24))
@@ -37,18 +36,17 @@ def _debe_ejecutarse(conf):
 
 def main():
     config_mgr = ConfigManager()
-    token_manager.set_ruta(config_mgr.config_dir)
+    token_manager.set_ruta(config_mgr.data_dir)  # ← ¡Importante! Datos en data_dir
     auto_actualizar_si_necesario()
-    
+
     conf = config_mgr.cargar_configuracion()
     reconfigurar = "--reconfigurar" in sys.argv
-    
+
     # === Requerir admin en primera ejecución o reconfiguración ===
     if (not conf) or reconfigurar:
         if not es_admin():
             print("Se requieren privilegios de administrador para configurar la tarea para todos los usuarios.")
             if sys.platform == "win32":
-                import ctypes
                 ctypes.windll.shell32.ShellExecuteW(
                     None, "runas", sys.executable, " ".join(sys.argv), None, 1
                 )
@@ -56,8 +54,8 @@ def main():
             else:
                 print("Por favor, ejecute con 'sudo'.")
                 sys.exit(1)
-    
-    # === Modo reconfiguración ===                
+
+    # === Modo reconfiguración ===
     if reconfigurar:
         print('Modo reconfiguración activado')
         if os.path.exists(config_mgr.config_file):
@@ -82,12 +80,12 @@ def main():
         else:
             print("Error: No se pudo registrar el equipo en el servidor.")
     else:
-        # ✅ NUEVO: Verificación de frecuencia antes de ejecutar
+        # >>> Verificación de frecuencia <<<
         if not _debe_ejecutarse(conf):
             print("No es momento de ejecutar (según configuración). Saliendo.")
-            return  # Salir sin hacer nada
+            return
 
-        # Actualizar última ejecución ANTES de recolectar
+        # Actualizar última ejecución
         config_mgr.guardar_configuracion(
             conf["ip_servidor"],
             conf["horas_tarea"],

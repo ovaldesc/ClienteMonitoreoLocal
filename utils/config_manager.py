@@ -1,4 +1,4 @@
-# utils/config_manager.py (MODIFICADO)
+# utils/config_manager.py
 
 import os
 import json
@@ -9,11 +9,25 @@ from datetime import datetime
 from utils.aes_puro import _aes_cbc_encrypt, _aes_cbc_decrypt
 
 def _get_config_dir():
+    """Ruta de configuración global (accesible por todos los usuarios)."""
     system = platform.system().lower()
     if system == "windows":
-        return os.path.join(os.environ.get("APPDATA", ""), "ClienteMonitoreoLocal")
+        # Windows XP: C:\Documents and Settings\All Users\Application Data
+        all_users = os.environ.get("ALLUSERSPROFILE", r"C:\Documents and Settings\All Users")
+        return os.path.join(all_users, "Application Data", "ClienteMonitoreoLocal")
     elif system == "linux":
-        return os.path.join(os.path.expanduser("~"), ".config", "ClienteMonitoreoLocal")
+        return "/etc/ClienteMonitoreoLocal"
+    else:
+        raise OSError("Sistema no soportado")
+
+def _get_data_dir():
+    """Ruta para datos variables (logs, informes pendientes)."""
+    system = platform.system().lower()
+    if system == "windows":
+        all_users = os.environ.get("ALLUSERSPROFILE", r"C:\Documents and Settings\All Users")
+        return os.path.join(all_users, "Application Data", "ClienteMonitoreoLocal")
+    elif system == "linux":
+        return "/var/lib/ClienteMonitoreoLocal"
     else:
         raise OSError("Sistema no soportado")
 
@@ -21,7 +35,7 @@ def _get_config_file():
     return os.path.join(_get_config_dir(), "config.csi")
 
 def _get_log_file():
-    return os.path.join(_get_config_dir(), "CSI.log")
+    return os.path.join(_get_data_dir(), "CSI.log")
 
 def _generar_clave_128():
     try:
@@ -35,12 +49,14 @@ def _generar_clave_128():
 class ConfigManager:
     def __init__(self):
         self.config_dir = _get_config_dir()
+        self.data_dir = _get_data_dir()
         self.config_file = _get_config_file()
         self.log_file = _get_log_file()
         self._crear_directorio()
 
     def _crear_directorio(self):
         os.makedirs(self.config_dir, exist_ok=True)
+        os.makedirs(self.data_dir, exist_ok=True)
 
     def guardar_configuracion(self, ip_servidor, horas_tarea, ultima_ejecucion=None):
         datos = {
@@ -68,6 +84,7 @@ class ConfigManager:
     def get_rutas(self):
         return {
             "config_dir": self.config_dir,
+            "data_dir": self.data_dir,
             "config_file": self.config_file,
             "log_file": self.log_file,
         }

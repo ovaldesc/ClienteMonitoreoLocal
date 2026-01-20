@@ -1,10 +1,9 @@
-#utils/consola.py
+# utils/consola.py
 
 import sys
 import os
 import ctypes
 from utils.config_manager import ConfigManager
-
 def es_admin():
     """Devuelve True si se está ejecutando con privilegios de administrador (Windows) o root (Linux)."""
     if sys.platform == "win32":
@@ -35,4 +34,4 @@ def ocultar_consola_si_no_interactiva():
             if hwnd:
                 user32.ShowWindow(hwnd, 0)  # SW_HIDE
         except Exception:
-            pass  # Si falla, no pasa nada; seguimos en modo consola
+            pass

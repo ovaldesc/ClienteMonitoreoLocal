@@ -1,4 +1,5 @@
 # services/reporte.py
+
 import os
 import json
 import time
@@ -8,7 +9,8 @@ from .servidor import ClienteServidor
 
 def _get_pendientes_dir():
     config = ConfigManager()
-    return os.path.join(config.config_dir, "Informes_Pendientes")
+    # ✅ Usar data_dir para datos variables
+    return os.path.join(config.data_dir, "Informes_Pendientes")
 
 def guardar_informe_local(datos):
     try:

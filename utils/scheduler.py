@@ -11,12 +11,18 @@ from ctypes import wintypes
 from .consola import es_admin
 
 def _get_ruta_instalada():
-    config = ConfigManager()
-    if getattr(sys, 'frozen', False):
-        exe_name = "ClienteMonitoreo.exe" if platform.system() == "Windows" else "ClienteMonitoreo"
-        return os.path.join(config.config_dir, exe_name)
+    """Ruta global del binario instalado."""
+    system = platform.system().lower()
+    if system == "windows":
+        if platform.machine().endswith('64'):
+            base = r"C:\Program Files (x86)"
+        else:
+            base = r"C:\Program Files"
+        return os.path.join(base, "ClienteMonitoreoLocal", "ClienteMonitoreo.exe")
+    elif system == "linux":
+        return "/opt/ClienteMonitoreoLocal/ClienteMonitoreo"
     else:
-        return os.path.join(config.config_dir, "main.py")
+        raise OSError("Sistema no soportado")
 
 def _copiar_ejecutable_a_config():
     destino = _get_ruta_instalada()
