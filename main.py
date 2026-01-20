@@ -13,6 +13,7 @@ from services.servidor import ClienteServidor
 from utils.config_interactiva import pedir_configuracion_inicial
 from utils.consola import ocultar_consola_si_no_interactiva
 from utils.auto_actualizacion import auto_actualizar_si_necesario
+from utils.consola import es_admin
 
 def _debe_ejecutarse(conf):
     """Devuelve True si ya pasó el tiempo necesario desde la última ejecución."""
@@ -38,8 +39,26 @@ def main():
     config_mgr = ConfigManager()
     token_manager.set_ruta(config_mgr.config_dir)
     auto_actualizar_si_necesario()
-
-    if "--reconfigurar" in sys.argv:
+    
+    conf = config_mgr.cargar_configuracion()
+    reconfigurar = "--reconfigurar" in sys.argv
+    
+    # === Requerir admin en primera ejecución o reconfiguración ===
+    if (not conf) or reconfigurar:
+        if not es_admin():
+            print("Se requieren privilegios de administrador para configurar la tarea para todos los usuarios.")
+            if sys.platform == "win32":
+                import ctypes
+                ctypes.windll.shell32.ShellExecuteW(
+                    None, "runas", sys.executable, " ".join(sys.argv), None, 1
+                )
+                sys.exit(0)
+            else:
+                print("Por favor, ejecute con 'sudo'.")
+                sys.exit(1)
+    
+    # === Modo reconfiguración ===                
+    if reconfigurar:
         print('Modo reconfiguración activado')
         if os.path.exists(config_mgr.config_file):
             os.remove(config_mgr.config_file)
